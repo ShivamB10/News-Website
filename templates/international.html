@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <style>
+        .international {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        .grid-item {
+            border: 1px solid rgb(168, 168, 168);
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+
+
+        }
+
+        body {
+            background-color: #fff;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .dropdown-item:hover {
+            color: #bceb3c;
+        }
+
+        .navbar {
+            border-bottom: 0px solid #bceb3c;
+        }
+
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #bceb3c;
+        }
+
+        .navbar-light .navbar-nav .nav-link.active {
+            color: #bceb3c;
+        }
+
+        .icon-cart {
+            color: #bceb3c;
+            font-size: 1.5rem;
+        }
+
+        .dropdown-menu {
+            border: 1px solid #bceb3c;
+        }
+
+        .navbar-bg-color {
+            background-color: #fff;
+        }
+
+        .navbar-nav {
+            margin-right: 4%;
+        }
+
+        .nav-item {
+            margin: 0.75em;
+        }
+
+        .navbar-text {
+            font-weight: 500;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>NEWS</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-text fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h1>NEWS NOW</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0 ms-auto mr-5">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="\">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/international">INTERNATIONAL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/sports">SPORTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/buisness">BUSINESS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/technology">TECHNOLOGY</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            HELLO, {{user.username}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Login/Sign Up
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="/login">Login</a>
+                            </li>
+
+                            <li><a class="dropdown-item" href="/register">Sign Up</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="international">
+        {% for new,des, i in mylist %}
+        <div class="grid-item mx-5 my-4">
+            <img src="{{i}}" alt="" style="max-width: 600px">
+            <h3>{{new}}</h3>
+            {{value | linebreaks}}
+            <a data-toggle="collapse" href="#collapseExample/{{ forloop.counter }}" aria-expanded="false"
+                aria-controls="collapseExample">Read
+                More</a>
+            <div class="collapse" id="collapseExample/{{ forloop.counter }}">
+                <div class="card card-body">
+                    <h4>Description:</h4> {{des}}
+                    {{value | linebreaks}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
